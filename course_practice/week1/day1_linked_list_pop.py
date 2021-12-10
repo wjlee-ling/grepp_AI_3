@@ -1,6 +1,7 @@
 # practice 8
 """
 to-do: dummy node가 있을 때 없을 때 코드 비교, 장단점 정리, 최종 링크드 리스트 정리
+test add
 """
 
 class Node:
