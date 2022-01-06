@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content1 %}
+<h1>Weapons</h1>
+<p>At the moment available are:</p>
+<ul>
+    {% for id, weapon in template_weapons.items() %} 
+        {% if template_stocks[id] > 1 %} 
+        <li>{{template_stocks[id]}} {{weapon | title}}s</li>
+        {% else %} 
+        <li>{{template_stocks[id]}} {{weapon | title}}</li>
+        {% endif %} 
+    {% endfor %}
+</ul>
+<h3>Add a new weapon with its quantity or remove an existing one:</h3>
+<form method="post">
+    {{template_form.weapon.label}}
+    {{template_form.weapon()}}
+    (
+        {{template_form.stock.label}}
+        {{template_form.stock()}}
+    )
+    {{template_form.update()}}
+    {{template_form.delete()}}
+    
+</form>
+{% endblock %}

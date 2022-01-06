@@ -4,6 +4,8 @@
 
 <ver1>
 문제점: 정확성은 100 퍼센트 통과이나, 효율성 검사를 통과하지 못함.
+<ver2>
+정답 추가
 """
 
 def heapify(unsorted, i, heap_size):
@@ -45,9 +47,30 @@ def solution(scoville, K):
         new = smallest + (next_smallest *2)
         scoville.append(new)
         count += 1
-        
+
     if scoville[-1] < K:
     # 원래 [None, N] 에서 ind_N == 1 and N <K이거나, 윗 과정을 거쳐도 마지막 요소가 K 미만일
         return -1
 
     return count
+
+## 정답: heapq라는 기본 내장 라이브러리 사용.
+# heapq.heapify시 오름차순으로 정렬을 해줘서 heapify를 여러번 할 필요없음 (위 내 코드는 여러번함)
+
+import heapq
+def answer_solution(scoville, K):
+    answer = 0
+    heapq.heapify(scoville)
+    while True:
+        smallest = heapq.heappop(scoville)
+        if smallest >=K:
+            break
+        elif len(scoville) == 0:
+            answer = -1
+            break
+        next_smallest = heapq.heappop(scoville)
+        new = smallest + (next_smallest)*2
+        heapq.heappush(scoville, new)
+        answer +=1
+
+    return answer
